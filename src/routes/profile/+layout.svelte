@@ -1,5 +1,4 @@
 <script lang="ts">
-    import '../lib/css/normallize.css';
     import Header from '$lib/components/Header.svelte';
     import Footer from '$components/Footer.svelte';
 </script>
@@ -23,18 +22,5 @@
 
 <style lang="stylus">
     
-    :global(body)
-        font-family 'Bricolage Grotesque', sans-serif
-        margin 0
-        padding 0
-        background-color #363737
-
-	main
-		margin 0 auto
-		max-width 1300px
-		padding 12px
-
-		@media only screen and (min-width 991px)
-			padding 24px
 
 </style>
