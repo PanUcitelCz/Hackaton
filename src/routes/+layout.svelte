@@ -1,5 +1,7 @@
 <script lang="ts">
     import '../lib/css/normallize.css';
+    import Header from '$lib/components/Header.svelte';
+    import Footer from '$components/Footer.svelte';
 </script>
 
 <svelte:head>
@@ -11,10 +13,13 @@
 	/>
 </svelte:head>
 
+<Header />
+
 <main>
     <slot />
 </main>
 
+<Footer />
 
 <style lang="stylus">
     
