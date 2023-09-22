@@ -2,6 +2,7 @@
     // Declaring props
     export let symbol: string;
     export let bgColor: string;
+    
 </script>
 
 <button on:click style="background-color: {bgColor}">
