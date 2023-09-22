@@ -10,7 +10,7 @@
 
     <div class="container">
         <div class="label">
-            <h3>Login</h3>
+            <h3>Registrace</h3>
         </div>
         <div class="group">
             <input type="text" id="nick" class="input" required="true">
@@ -27,12 +27,26 @@
             <!-- svelte-ignore a11y-label-has-associated-control -->
             <label>Password</label>
         </div>
-        <div class="butt">
-            <Buttons on:click={undefined} symbol={"Přihlásit"} bgColor={"#39c41f"} />
-            <Buttons on:click={undefined} symbol={"Zaregistrovat"} bgColor={"grey"} />
+        <div class="group">
             
+            <input type="password"  id="password_opakovani" class="input" required="true">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <!-- svelte-ignore a11y-label-has-associated-control -->
+            <label>Password</label>
         </div>
-        <a href="/obnova_hesla">Obnovit heslo</a>
+        <div class="group">
+            
+            <input type="email"  id="email" class="input" required="true">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <!-- svelte-ignore a11y-label-has-associated-control -->
+            <label>Email</label>
+        </div>
+        <div class="butt">
+
+            <Buttons on:click={undefined} symbol={"Zaregistrovat"} bgColor={"grey"} />
+        </div>
     </div>
 
 <style lang="stylus">

@@ -1,31 +1,35 @@
 <script lang="ts">
-	import Buttons from "./Buttons.svelte";
+	import Buttons from "$lib/components/Buttons.svelte";
 
 
 </script>
 
+<svelte:head>
+    <title>Login</title>
+</svelte:head>
+
     <div class="container">
         <div class="label">
-            <h3>Login</h3>
+            <h3>Obnovení hesla</h3>
         </div>
         <div class="group">
-            <input type="text" id="nick" class="input" required="true">
+            <input type="text" id="emial" class="input" required="true">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <!-- svelte-ignore a11y-label-has-associated-control -->
+            <label>Email</label>
+        </div>
+        <div class="group">
+            
+            <input type="text"  id="Nick" class="input" required="true">
             <span class="highlight"></span>
             <span class="bar"></span>
             <!-- svelte-ignore a11y-label-has-associated-control -->
             <label>Nick</label>
         </div>
-        <div class="group">
-            
-            <input type="password"  id="password" class="input" required="true">
-            <span class="highlight"></span>
-            <span class="bar"></span>
-            <!-- svelte-ignore a11y-label-has-associated-control -->
-            <label>Password</label>
-        </div>
         <div class="butt">
-            <Buttons on:click={undefined} symbol={"Přihlásit"} bgColor={"#39c41f"} />
-            <Buttons on:click={undefined} symbol={"Zaregistrovat"} bgColor={"grey"} />
+            <Buttons on:click={undefined} symbol={"Požádat"} bgColor={"grey"} />
+            
         </div>
     </div>
 
@@ -37,6 +41,7 @@
         flex-direction column
         justify-content center
         align-items center
+        margin-top 36px
 
     .label
         color white
@@ -141,3 +146,5 @@
                 background transparent
 
 </style>
+
+
