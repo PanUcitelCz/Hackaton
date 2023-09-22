@@ -18,6 +18,7 @@
     }
 
     let isOpen = false
+
 </script>
 
     <svelte:window on:resize={resize} />
@@ -25,18 +26,18 @@
     <header class="Header">
         <div class="wrapper">
             <div class="logo">
-                
+                <img src="images/White logo - no background.svg" alt="">
             </div>
             <button class="Hamburger" class:isOpen on:click={changeOpenState}>
                 <span class="Hamburger-stick" />
                 <span class="Hamburger-stick" />
                 <span class="Hamburger-stick" />
             </button>
-            <nav>
+            <nav class:isOpen>
                 <ul>
-                    <li><a href="#">Home-page</a></li>
-                    <li><a href="#">Test</a></li>
-                    <li><a href="#">Test1</a></li>
+                    <li><a href="/">Home-page</a></li>
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/">Test1</a></li>
                 </ul>
             </nav>
         </div>
@@ -52,45 +53,92 @@
         width 100%
         height 96px
         background-color grey
+        z-index 10
+        display flex
+
+        .logo
+            position relative
+            display flex
+            flex-direction flex-start
+            width 105px
+            z-index 10
+            margin-left 10px
+
+            img
+                width 80px
+                z-index 10
 
         .wrapper
+            width 100%
+            margin auto
             max-width 1300px
             display flex
-            justify-content center
             min-height: 96px
+            background grey
+            z-index 10
+
+            &:after
+                content ""
+                position absolute
+                z-index 1
+                left 50%
+                width 100%
+                height 100%
+                background-color grey
+                transform translateX(-50%)
+                
+                @media $large-up
+                    display none
 
         nav
             position absolute
-            display flex
-            justify-content center
-            align-items center
             background-color grey
+            z-index 1
+            top 0
+            left 0
             width 100%
-            
+            transform translateY(-100%)
+            transition transform .6s $easeOutExpo
 
+            &.isOpen
+                transform translateY(60%)
+
+            @media $large-up
+                position static
+                transition none
+                transform none
+                display flex
+                
+            
             ul
-                //margin 0
-                //margin-top 10px
                 padding 0
                 list-style-type none
                 display flex
                 align-items center
                 justify-content center
+                align-items center
                 gap 35px
                 flex-direction column
                 width 100%
 
+                @media $large-up
+                    padding 0
+                    display flex
+                    flex-direction row
+                    justify-content flex-end
+                    gap 24px
+                    margin-right 24px
+
                 
                 li
                     color blue
-                    width 100%
                     display flex
                     align-items center
                     justify-content center
 
                     a
                         text-decoration none
-                        color black
+                        color white
 
                         &:hover
                             color red
@@ -143,8 +191,4 @@
                 &:nth-child(3)
                     bottom 0
                     
-
-
-
-
 </style>
