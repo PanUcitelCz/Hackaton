@@ -3,7 +3,7 @@ from flask_cors import CORS
 
 from pymongo import MongoClient
 from types import SimpleNamespace
-
+import requests
 import json
 from hashlib import sha512 
 from uuid import uuid4
@@ -62,6 +62,16 @@ def register():
 
     return Response("User created", status=201)
 
+
+@app.route("/search_by_name", methods=["GET"])
+def search_by_name():
+    Headers={"Referer":"https://foodapp.com/","accept":"application/json"}
+    x=requests.get('https://api.content.tripadvisor.com/api/v1/location/nearby_search?latLong=49.7432394%2C13.4106877&key=06071D2668FF4DE3B82432788FF07AE8&language=en',headers=Headers);
+    #data = json.loads(request.get_data(), object_hook=lambda d: SimpleNamespace(**d))
+    print(x.json())
+    
+    msg = Response(x.json(),status=200).headers["data"] = "application/json"
+    return msg
 
 if __name__ == "__main__":
     app.run(debug=True)
