@@ -4,7 +4,7 @@ from pymongo import MongoClient
 
 import random
 
-CONNECTION_STRING = "mongodb+srv://user:pass@cluster.mongodb.net/test"
+CONNECTION_STRING = "mongodb://localhost:27017"
 
 def get_database():
    pass 
@@ -14,7 +14,7 @@ app = Flask(__name__)
 
 # Leuze latlong: 49.7432394,13.4106877
 
-@app.route("/api")
+@app.route("/register", methods=["POST", "GET"])
 def hello():
     return str(random.randint(0, 100))
 
