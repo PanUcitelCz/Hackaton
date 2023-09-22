@@ -25,6 +25,8 @@
     
     :global(body)
         font-family 'Bricolage Grotesque', sans-serif
+        margin 0
+        padding 0
 
 	main
 		margin 0 auto
