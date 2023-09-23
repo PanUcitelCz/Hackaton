@@ -15,14 +15,24 @@
 
 	const content = rawResponse;
 
-	console.log(content.text());
+	content.text().then(e=>{
 
-	Cookies.set('user', username)
+	    Cookies.set('user', username)
+	    try {
+		Cookies.set('session_id', JSON.parse(e).session_id)
+	    }
+	    catch (e){
+		// TODO throw user not found/wrong password
+	    }
 
-	console.log(Cookies.get("user"))
+	    console.log(Cookies.get("user"))
+	    console.log(Cookies.get("session_id"))
+
+	    window.location.href = "./profile"
+
+	})	
     }    
 
-	}
 
 </script>
 
@@ -50,7 +60,7 @@
             <label>Password</label>
         </div>
         <div class="butt">
-            <Buttons on:click={undefined} symbol={"Přihlásit"} bgColor={"#39c41f"} />
+	    <Buttons on:click={async () => {await login(document.getElementById("nick").value, document.getElementById("password").value)}} symbol={"Přihlásit"} bgColor={"#39c41f"} />
             <Buttons on:click={undefined} symbol={"Zaregistrovat"} bgColor={"grey"} />
             
         </div>
