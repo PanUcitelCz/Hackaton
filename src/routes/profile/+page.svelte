@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Card from "$components/Card.svelte";
+
     export let profile: string;
     export let data: Array<Object>;
     import Cookies from 'js-cookie'
@@ -76,59 +78,24 @@
 <div class="container">
     <section class="seznam">
         <div class="Nadpis">
-            <h3>Hodnocení</h3>
+            <h3>V poslední době hodnoceno</h3>
         </div>
         <div class="hlasovaci_container">
-	    {#each data as restaurace, index}
-	    	
-		<div class="restaurace">
-			<div class="Header-card">
-			    <div class="icon">
-				<img src="https://lh5.googleusercontent.com/p/AF1QipPjMAY9OvOWdck9_IIk_w7HC27hcbcFAHxFYYdl=w122-h92-k-no" alt="">
-			    </div>
-			    <div class="nazev">
-				<div class="title">
-				    <h3>{restaurace.name}</h3>
-				</div>
-				<div class="kadiboudy">
-				    <span>Průměr: </span>
-				    <span><img src="images/kadibouda.png" alt=""></span>
-				    <span><img src="images/kadibouda.png" alt=""></span>
-				    <span><img src="images/kadibouda.png" alt=""></span>
-				    <span><img src="images/kadibouda.png" alt=""></span>
-	
-				</div>
-			    </div>
-			</div>
-			<div class="Footer-card">
-			    <div class="odkazy">
-				<span>
-				    <img src="images/web.svg" alt="">
-				</span>
-				
-				<span>
-				    <img src="images/map.svg" alt="">
-				</span>
-
-				<span>
-				    <img src="images/coments.svg" alt="">
-				</span>
-			    </div>
-			    <div class="hodnoceni">
-				
-				<div class="like">
-				    <span>{restaurace.vote_count}</span>
-				    <span><img id="voteButton" src="images/like.svg" alt="" on:click={async () => {
-					 toggleVote(Cookies.get("user"), restaurace.location_id)
-					 }}></span>
-				</div>
-			    </div>
-			</div>
-		    
-		</div>
-
-	    {/each}
-        </div>
+            <Card 
+                img="https://lh5.googleusercontent.com/p/AF1QipMZlhgzRsVc9KykI6fj2yWoYVlW9DhaOd_WBiUH=w408-h272-k-no"
+                nadpis="Indická a Nepálská restaurace"
+                like=35
+                prumer=35 />
+            <Card 
+                img="https://lh5.googleusercontent.com/p/AF1QipMZlhgzRsVc9KykI6fj2yWoYVlW9DhaOd_WBiUH=w408-h272-k-no"
+                nadpis="Indická a Nepálská restaurace"
+                like=35
+                prumer=35 />
+            <Card 
+                img="https://lh5.googleusercontent.com/p/AF1QipMZlhgzRsVc9KykI6fj2yWoYVlW9DhaOd_WBiUH=w408-h272-k-no"
+                nadpis="Indická a Nepálská restaurace"
+                like=35
+                prumer=35 />
     </section>
 
     
@@ -141,6 +108,7 @@
     .nadpis
         display flex
         justify-content center
+        padding 0 15px
 
         h1
             color black
@@ -172,9 +140,9 @@
     .Nadpis
         margin 0px
         margin-bottom 15px
-        width 100%
         background-color #8a0c0c
         border-radius 10px 10px 0 0
+        padding 0 5px
         
         
 
