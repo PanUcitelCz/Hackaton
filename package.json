@@ -30,7 +30,9 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"js-cookie": "^3.0.5",
 		"path": "^0.12.7",
-		"stylus": "^0.55.0"
+		"stylus": "^0.55.0",
+		"venv": "^1.0.1"
 	}
 }

@@ -152,12 +152,12 @@
         .input:focus ~ .bar:before
             top -20px
             font-size 12px
-            color #0e94f4
+            color white
 
         .input:focus ~ .bar:after
             top -20px
             font-size 12px
-            color #0e94f4
+            color white
         
         .highlight
             position absolute
@@ -173,7 +173,7 @@
             
         @keyframes input-focus
             from
-                background #1486d7
+                background white
 
             to
                 width 185px

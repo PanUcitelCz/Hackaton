@@ -17,7 +17,7 @@
 
 	content.text().then(e=>{
 
-	    Cookies.set('user', username)
+	   Cookies.set('user', username)
 	    try {
 		Cookies.set('session_id', JSON.parse(e).session_id)
 	    }

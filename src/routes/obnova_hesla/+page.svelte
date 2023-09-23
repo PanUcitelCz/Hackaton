@@ -64,7 +64,7 @@
         display block
         width 185px
         border none
-        border-bottom 1px solid gray
+        border-bottom 1px solid white
         background transparent
         color white
 
@@ -72,7 +72,7 @@
             outline none
 
     label
-        color #999999
+        color white
         font-size 18px
         font-weight normal
         position absolute
@@ -86,12 +86,12 @@
     .input:focus ~ label
         top -20px
         font-size 12px
-        color #0e94f4
+        color white
     
     .input:valid ~ label
         top -20px
         font-size 12px
-        color #0e94f4
+        color white
     
    .bar
         position relative

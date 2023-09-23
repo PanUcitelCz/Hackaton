@@ -43,9 +43,9 @@
             </button>
             <nav class:isOpen>
                 <ul>
-                    <li><a href="/">Home-page</a></li>
-                    <li><a href="/login">Login</a></li>
-                    <li><a href="#" on:click={logout}>Test1</a></li>
+                    <li><a href="/profil">Home-page</a></li>
+                    <li><a href="/login">Chat</a></li>
+                    <li><a href="#" on:click={logout}>Odhlásit</a></li>
                 </ul>
             </nav>
         </div>
@@ -60,7 +60,7 @@
         position relative
         width 100%
         height 96px
-        background-color grey
+        background-color #e30613
         z-index 10
         display flex
 
@@ -147,9 +147,10 @@
                     a
                         text-decoration none
                         color white
+                        font-weight bold
 
                         &:hover
-                            color red
+                            color green
                             
         .Hamburger
             display block
