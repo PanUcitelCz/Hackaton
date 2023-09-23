@@ -4,10 +4,10 @@
     export let profile: string;
     export let data = [{"location_id": 0, "name": "0"}, {"location_id": 0, "name": "0"}];
     export let test = [1, 5, 3]
-    //import Cookies from 'js-cookie'
+    import Cookies from 'js-cookie'
     import { onMount } from 'svelte'
 
-    //profile = String(Cookies.get("user"))
+    profile = String(Cookies.get("user"))
     var voteToggled = "remove-vote"
 
     function eyo(nadpis, like, img, prumer, location_id){
@@ -15,7 +15,7 @@
 	    props :{
 		nadpis: nadpis,
 		like: like,
-		img: img,
+		img: "https://restaurace.ugigantu.cz/wp-content/uploads/2018/08/p7280088-1.jpg",
 		prumer: prumer,
 		location_id: location_id
 
@@ -59,7 +59,7 @@
 </svelte:head>
 
 <div class="nadpis">
-    <h1 on:click={() => {test.push(6); console.log("aa")}}>Výtejte {profile}</h1>
+    <h1 on:click={() => {test.push(6); console.log("aa")}}>Vítejte {profile}</h1>
 </div>
 
 <div class="container">
@@ -67,43 +67,7 @@
         <div class="Nadpis">
             <h3>Dostupné restaurace v okolí</h3>
         </div>
-        <div class="hlasovaci_container">
-                <Card
-                nadpis="MCdonald"
-                img="https://restaurace.ugigantu.cz/wp-content/uploads/2018/08/p7280088-1.jpg"
-                prumer=23
-                like=1
-                />
-                <Card
-                nadpis="MCdonald"
-                img="https://restaurace.ugigantu.cz/wp-content/uploads/2018/08/p7280088-1.jpg"
-                prumer=23
-                like=1
-                />
-                <Card
-                nadpis="MCdonald"
-                img="https://restaurace.ugigantu.cz/wp-content/uploads/2018/08/p7280088-1.jpg"
-                prumer=23
-                like=1
-                />
-                <Card
-                nadpis="MCdonald"
-                img="https://restaurace.ugigantu.cz/wp-content/uploads/2018/08/p7280088-1.jpg"
-                prumer=23
-                like=1
-                />
-                <Card
-                nadpis="MCdonald"
-                img="https://restaurace.ugigantu.cz/wp-content/uploads/2018/08/p7280088-1.jpg"
-                prumer=23
-                like=1
-                />  
-                <Card
-                nadpis="MCdonald"
-                img="https://restaurace.ugigantu.cz/wp-content/uploads/2018/08/p7280088-1.jpg"
-                prumer=23
-                like=1
-                />  
+        <div class="hlasovaci_container" id="eyo" use:eyo>
         </div>
      <!--   <div class="hlasovaci_container" id="eyo" use:eyo>
         </div>-->

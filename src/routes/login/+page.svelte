@@ -61,7 +61,7 @@
         </div>
         <div class="butt">
 	    <Buttons on:click={async () => {await login(document.getElementById("nick").value, document.getElementById("password").value)}} symbol={"Přihlásit"} bgColor={"#39c41f"} />
-            <Buttons on:click={undefined} symbol={"Zaregistrovat"} bgColor={"grey"} />
+	    <Buttons on:click={() => {window.location.href = "./register"}} symbol={"Zaregistrovat"} bgColor={"grey"} />
             
         </div>
         <a href="/obnova_hesla">Obnovit heslo</a>
