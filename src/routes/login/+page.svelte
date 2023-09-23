@@ -1,6 +1,28 @@
 <script lang="ts">
 	import Buttons from "$lib/components/Buttons.svelte";
+	import Cookies from 'js-cookie'
+	
+	async function login(username: string, password: string){
+    	const rawResponse = await fetch('http://localhost:5000/authenticate-user', {
+	    method: 'POST',
+	    headers: {
+	      'Accept': 'application/json',
+	      'Content-Type': 'application/json',
+	      'Access-Control-Allow-Origin': '*'
+	    },
+	    body: JSON.stringify({"name": username, "password": password})
+	});
 
+	const content = rawResponse;
+
+	console.log(content.text());
+
+	Cookies.set('user', username)
+
+	console.log(Cookies.get("user"))
+    }    
+
+	}
 
 </script>
 

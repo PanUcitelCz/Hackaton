@@ -1,5 +1,8 @@
 <script lang="ts">
     export let profile: string;
+    import Cookies from 'js-cookie'
+
+    profile = String(Cookies.get("user"))
 
 </script>
 

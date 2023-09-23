@@ -18,9 +18,6 @@ CORS(app)
 
 # Leuze latlong: 49.7432394,13.4106877
 
-def create_session():
-    random
-
 @app.route("/add-review", methods=["POST", "GET"])
 def add_review():
     review = json.loads(request.get_data(), object_hook=lambda d: SimpleNamespace(**d))
@@ -41,9 +38,9 @@ def authenticate_user():
     print(f"{db_user.get('hash')} got {sha512(user.password.encode('utf-8')).digest()}")
 
     if db_user.get("hash") == sha512(user.password.encode('utf-8')).digest():
-        response = Response(json.dumps({"session_id": uuid4()}), status=200)
+        response = Response(json.dumps({"session_id": uuid4().hex}), status=200)
         response.headers["Content-Type"] = "application/json"
-        return response
+        return response 
 
     else:
         return Response("Wrong password", status=401)
@@ -60,11 +57,13 @@ def register():
     
     db.users.insert_one({"name": user.name, "hash": sha512(user.password.encode('utf-8')).digest()})
 
-    return Response("User created", status=201)
+    response = Response(json.dumps({"session_id": uuid4().hex}), status=201)
+    response.headers["Content-Type"] = "application/json"
+    return response 
 
 
-@app.route("/search_by_name", methods=["GET"])
-def search_by_name():
+@app.route("/find-closest", methods=["GET"])
+def find_closest():
     Headers={"Referer":"https://foodapp.com/","accept":"application/json"}
     x=requests.get('https://api.content.tripadvisor.com/api/v1/location/nearby_search?latLong=49.7432394%2C13.4106877&key=06071D2668FF4DE3B82432788FF07AE8&language=en',headers=Headers);
     #data = json.loads(request.get_data(), object_hook=lambda d: SimpleNamespace(**d))
