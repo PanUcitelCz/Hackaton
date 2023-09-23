@@ -60,24 +60,53 @@
                     </div>
                 
             </div>
-            <figure class="restaurace">
-                <div class="icon">
-                    <img src="https://lh5.googleusercontent.com/p/AF1QipPjMAY9OvOWdck9_IIk_w7HC27hcbcFAHxFYYdl=w122-h92-k-no" alt="">
+            <div class="restaurace">
+                <div class="Header-card">
+                    <div class="icon">
+                        <img src="https://lh5.googleusercontent.com/p/AF1QipPjMAY9OvOWdck9_IIk_w7HC27hcbcFAHxFYYdl=w122-h92-k-no" alt="">
+                    </div>
+                    <div class="nazev">
+                        <div class="title">
+                            <h3>Restaurace</h3>
+                        </div>
+                        <div class="kadiboudy">
+                            <span>Průměr: </span>
+                            <span><img src="images/kadibouda.png" alt=""></span>
+                            <span><img src="images/kadibouda.png" alt=""></span>
+                            <span><img src="images/kadibouda.png" alt=""></span>
+                            <span><img src="images/kadibouda.png" alt=""></span>
+
+                        </div>
+                    </div>
                 </div>
-                <div class="nazev">
-                    <span>Restaurace</span>
+                <div class="Footer-card">
+                    <div class="odkazy">
+                        <span>
+                            <img src="images/web.svg" alt="">
+                        </span>
+                        
+                        <span>
+                            <img src="images/map.svg" alt="">
+                        </span>
+
+                        <span>
+                            <img src="images/coments.svg" alt="">
+                        </span>
+                    </div>
+                    <div class="hodnoceni">
+                        
+                        <div class="like">
+                            <span>35x</span>
+                            <span><img src="images/like.svg" alt=""></span>
+                        </div>
+                    </div>
                 </div>
-            </figure>
+            
+        </div>
         </div>
     </section>
 
-    <section class="seznam">
-        <div class="hlasovaci_container">
-            <div class="Nadpis">
-                <h3>Hodnocení</h3>
-            </div>
-        </div>
-    </section>
+    
 
     <section class="side_bar">
         
@@ -137,6 +166,7 @@
         min-height 150px
         box-shadow 0px 2px 10px grey
         padding 10px
+        margin-bottom 15px
         
             
 
@@ -162,7 +192,7 @@
 
         .title
             display flex
-            align-items start
+            
 
         .nadpis
             display flex
