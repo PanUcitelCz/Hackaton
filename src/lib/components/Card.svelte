@@ -1,56 +1,53 @@
 <script lang="ts">
-	import Card from "$components/Card.svelte";
 
-    export let profile: string;
+    export let nadpis: string;
+    export let img: string;
+    export let prumer: string;
+    export let like: string;
 
 </script>
 
-<svelte:head>
-    <title>{profile}</title>
-</svelte:head>
 
-<div class="nadpis">
-    <h1>Výtejte {profile}</h1>
-</div>
-
-<div class="container">
-    <section class="seznam">
-        <div class="Nadpis">
-            <h3>V poslední době hodnoceno</h3>
+<div class="restaurace">
+    <div class="Header-card">
+        <div class="icon">
+            <img src="{img}" alt="">
         </div>
-        <div class="hlasovaci_container">
-            <Card 
-                img="https://lh5.googleusercontent.com/p/AF1QipMZlhgzRsVc9KykI6fj2yWoYVlW9DhaOd_WBiUH=w408-h272-k-no"
-                nadpis="Indická a Nepálská restaurace"
-                like=35
-                prumer=35 />
-            <Card 
-                img="https://lh5.googleusercontent.com/p/AF1QipMZlhgzRsVc9KykI6fj2yWoYVlW9DhaOd_WBiUH=w408-h272-k-no"
-                nadpis="Indická a Nepálská restaurace"
-                like=35
-                prumer=35 />
-            <Card 
-                img="https://lh5.googleusercontent.com/p/AF1QipMZlhgzRsVc9KykI6fj2yWoYVlW9DhaOd_WBiUH=w408-h272-k-no"
-                nadpis="Indická a Nepálská restaurace"
-                like=35
-                prumer=35 />
-    </section>
+        <div class="nazev">
+            <div class="title">
+                <h3>{nadpis}</h3>
+            </div>
+                <div class="kadiboudy">
+                    <span>{prumer} </span>
+                    <span><img src="images/kadibouda.png" alt=""></span>
+                    <span><img src="images/kadibouda.png" alt=""></span>
+                    <span><img src="images/kadibouda.png" alt=""></span>
+                    <span><img src="images/kadibouda.png" alt=""></span>
+                </div>
+            </div>
+        </div>
+        <div class="Footer-card">
+            <div class="odkazy">
+                <span>
+                    <img src="images/web.svg" alt="">
+                </span>
+                <span>
+                    <img src="images/map.svg" alt="">
+                </span>
+                <span>
+                    <img src="images/coments.svg" alt="">
+                </span>
+            </div>
+            <div class="hodnoceni">
+                <div class="like">
+                    <span>{like}</span>
+                    <span><img src="images/like.svg" alt=""></span>
+                </div>
+            </div>
+        </div>
 
-    
-
-    <section class="side_bar">
-        
-    </section>
 </div>
 <style lang="stylus">
-    .nadpis
-        display flex
-        justify-content center
-        padding 0 15px
-
-        h1
-            color black
-
 
     .seznam
         width 100%
@@ -78,6 +75,7 @@
     .Nadpis
         margin 0px
         margin-bottom 15px
+        width 100%
         background-color #8a0c0c
         border-radius 10px 10px 0 0
         padding 0 5px
@@ -102,12 +100,12 @@
             
 
     .icon
-        width 100px
+        width 200px
         display flex
         align-items flex-start
 
         img
-            width 100px
+            width 200px
             border-radius 10px
             max-height 100px
 
@@ -120,6 +118,9 @@
         display flex
         flex-direction column
         align-items start
+
+        @media $large-up
+            padding 0 105px
 
         .title
             display flex
@@ -166,6 +167,7 @@
         display flex
         justify-content flex-end
         gap 24px
+        
 
         img
             width 30px
@@ -184,5 +186,5 @@
         display flex
         align-items center
 
-            
+
 </style>
