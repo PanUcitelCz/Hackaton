@@ -37,7 +37,6 @@
         justify-content center
         align-items center
         flex-direction column
-        margin-top 15%
 
     .logo
         width 100%

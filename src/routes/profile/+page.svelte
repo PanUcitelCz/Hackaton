@@ -10,13 +10,14 @@
     profile = String(Cookies.get("user"))
     var voteToggled = "remove-vote"
 
-    function eyo(nadpis, like, img, prumer){
+    function eyo(nadpis, like, img, prumer, location_id){
     new Card({target: document.querySelector("#eyo"),
 	    props :{
 		nadpis: nadpis,
 		like: like,
 		img: img,
-		prumer: prumer
+		prumer: prumer,
+		location_id: location_id
 
 	    }})
     }
@@ -44,42 +45,12 @@
 
 	    data = JSON.parse(e)
 	    data.forEach(restaurace => {
-		eyo(restaurace.name, restaurace.like, "", restaurace.average)
+		eyo(restaurace.name, restaurace.vote_count, "", restaurace.average, restaurace.location_id)
 	    })
 	    console.log("")
 	});
     });
 
-    async function toggleVote(username: string, location_id: string){ 
-	if(voteToggled == "add-vote"){
-	    voteToggled = "remove-vote"
-	    //document.getElementById("voteButton").style.backgroundColor = "white"
-	}
-	else{
-	    voteToggled = "add-vote"
-	    //document.getElementById("voteButton").style.backgroundColor = "green"
-	}
-
-	const rawResponse = await fetch(`http://localhost:5000/${voteToggled}`, {
-	    method: 'POST',
-	    headers: {
-	      'Accept': 'application/json',
-	      'Content-Type': 'application/json',
-	      'Access-Control-Allow-Origin': '*'
-	    },
-	    body: JSON.stringify({"username": username, "location_id": location_id})
-	});
-
-	const content = rawResponse;
-
-	content.text().then(e=>{
-	    e=JSON.parse(e)
-
-	    console.log(e)
-	    
-	    
-	}); 
-    } 
 
 </script>
 

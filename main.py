@@ -84,12 +84,18 @@ def remove_vote():
 @app.route("/add-vote", methods=["POST"])
 def add_vote():
     
+    print(request.get_data())
     vote = json.loads(request.get_data(), object_hook=lambda d: SimpleNamespace(**d))
 
-    if(db.locations.find_one({"location_id": vote.location_id}) is None):
+    if db.votes.find_one({"location_id": vote.location_id, "user_id": vote.username}):
+        return Response(status=401)
+
+    if(db.locations.find_one({"location_id": vote.location_id}) == None):
         db.locations.insert_one({"location_id": vote.location_id, "zumpy": 0, "visit-count": 0 })
         
-    db.votes.insert_one({"location_id": data.location_id, "user_id": vote.user_id, "vote_time": vote.time})
+    db.votes.insert_one({"location_id": vote.location_id, "user_id": vote.username, "vote_time": vote.time})
+
+    print("added vote!!!!!!!!!!!!!!!")
     return Response(status=200)
 
 @app.route("/find-closest", methods=["GET"])
@@ -105,6 +111,10 @@ def find_closest():
         if db_location:
             average = 0
             count = 0
+            vote_count = 0
+
+            for vote in db.votes.find({"location_id": location.get("location_id")}):
+                vote_count += 1
 
             for review in db.reviews.find({}):
                 if location.get("location_id") == review.get("location_id"):
@@ -119,7 +129,7 @@ def find_closest():
             found_locations[i]["zumpy"] = db_location.get("zumpy")
             found_locations[i]["kadiboudy"] = db_location.get("kadiboudy")
             found_locations[i]["visit_count"] = db_location.get("visit_count")
-            found_locations[i]["vote_count"] = db_location.get("vote_count")
+            found_locations[i]["vote_count"] = vote_count
             found_locations[i]["average"] = average
 
         else:
