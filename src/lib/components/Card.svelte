@@ -18,7 +18,7 @@
                 <h3>{nadpis}</h3>
             </div>
                 <div class="kadiboudy">
-                    <span>{prumer} </span>
+                    <span>{prumer}</span>
                     <span><img src="images/kadibouda.png" alt=""></span>
                     <span><img src="images/kadibouda.png" alt=""></span>
                     <span><img src="images/kadibouda.png" alt=""></span>

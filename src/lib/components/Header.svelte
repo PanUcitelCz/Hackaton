@@ -43,9 +43,9 @@
             </button>
             <nav class:isOpen>
                 <ul>
-                    <li><a href="/">Home-page</a></li>
-                    <li><a href="/login">Login</a></li>
-                    <li><a href="#" on:click={logout}>Test1</a></li>
+                    <li><a href="/profil">Home-page</a></li>
+                    <li><a href="/login">Chat</a></li>
+                    <li><a href="#" on:click={logout}>Odhlásit</a></li>
                 </ul>
             </nav>
         </div>

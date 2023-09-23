@@ -1,8 +1,10 @@
 <script lang="ts">
     import '../lib/css/normallize.css';
 </script>
+<main>
+    <slot />
+</main>
 
-<slot />
 
 <style lang="stylus">
     
@@ -13,7 +15,7 @@
         background-color #E30613
 
 	main
-		margin 0 auto
+		margin auto
 		max-width 1300px
 		padding 12px
 

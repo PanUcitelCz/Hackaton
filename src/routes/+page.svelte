@@ -21,23 +21,18 @@
             <a href="/login"><Buttons on:click={undefined} symbol={"Přihlásit"} bgColor={"#39c41f"} /></a>
             <a href="/register"><Buttons on:click={undefined} symbol={"Zaregistrovat"} bgColor={"grey"} /></a>
         </div>
-        <img src="images/like_green.svg">
    </div>
 
 
 <style lang="stylus">
 
     .hero
-        position relative
-        margin auto
-        height 100%
         width 100%
         max-width 1300px
         display flex
         justify-content center
         align-items center
         flex-direction column
-        margin-top 15%
 
     .logo
         width 100%

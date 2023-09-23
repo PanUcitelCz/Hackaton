@@ -31,6 +31,7 @@
 	"type": "module",
 	"dependencies": {
 		"path": "^0.12.7",
-		"stylus": "^0.55.0"
+		"stylus": "^0.55.0",
+		"venv": "^1.0.1"
 	}
 }
