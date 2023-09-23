@@ -66,6 +66,13 @@ def register():
     return response 
 
 
+@app.route("/find-voted", methods=["POST"])
+def find_voted():
+    data = json.loads(request.get_data(), object_hook=lambda d: SimpleNamespace(**d))
+
+    all_votes = db.votes.find({})
+
+
 
 @app.route("/remove-vote", methods=["POST"])
 def remove_vote():
@@ -99,12 +106,14 @@ def find_closest():
             found_locations[i]["zumpy"] = db_location.get("zumpy")
             found_locations[i]["kadiboudy"] = db_location.get("kadiboudy")
             found_locations[i]["visit_count"] = db_location.get("visit_count")
+            found_locations[i]["vote_count"] = db_location.get("vote_count")
 
         else:
             found_locations[i]["zumpy"] = 0
             found_locations[i]["kadiboudy"] = 0
             found_locations[i]["visit_count"] = 0
             found_locations[i]["average"] = 0
+            found_locations[i]["vote_count"] = 0
 
         #print(location)
         #print(db_location)

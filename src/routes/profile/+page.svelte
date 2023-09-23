@@ -1,9 +1,11 @@
 <script lang="ts">
     export let profile: string;
+    export let data: Array<Object>;
     import Cookies from 'js-cookie'
     import { onMount } from 'svelte'
 
     profile = String(Cookies.get("user"))
+    var voteToggled = "remove-vote"
 
     onMount(async () => {
 	if(Cookies.get("session_id") == ""){
@@ -24,9 +26,43 @@
 
 	content.text().then(e=>{
 	    e=JSON.parse(e)
+	    console.log("recieved")
+	    console.log(e)
+
+	    data = e
 	    console.log(e)
 	});
     });
+
+    async function toggleVote(username: string, location_id: string){ 
+	if(voteToggled == "add-vote"){
+	    voteToggled = "remove-vote"
+	    //document.getElementById("voteButton").style.backgroundColor = "white"
+	}
+	else{
+	    voteToggled = "add-vote"
+	    //document.getElementById("voteButton").style.backgroundColor = "green"
+	}
+
+	const rawResponse = await fetch(`http://localhost:5000/${voteToggled}`, {
+	    method: 'POST',
+	    headers: {
+	      'Accept': 'application/json',
+	      'Content-Type': 'application/json',
+	      'Access-Control-Allow-Origin': '*'
+	    },
+	    body: JSON.stringify({"username": username, "location_id": location_id})
+	});
+
+	const content = rawResponse;
+
+	content.text().then(e=>{
+	    e=JSON.parse(e)
+
+	    console.log(e)
+	}); 
+    }
+
 </script>
 
 <svelte:head>
@@ -43,92 +79,55 @@
             <h3>Hodnocení</h3>
         </div>
         <div class="hlasovaci_container">
-            <div class="restaurace">
-                    <div class="Header-card">
-                        <div class="icon">
-                            <img src="https://lh5.googleusercontent.com/p/AF1QipPjMAY9OvOWdck9_IIk_w7HC27hcbcFAHxFYYdl=w122-h92-k-no" alt="">
-                        </div>
-                        <div class="nazev">
-                            <div class="title">
-                                <h3>Restaurace</h3>
-                            </div>
-                            <div class="kadiboudy">
-                                <span>Průměr: </span>
-                                <span><img src="images/kadibouda.png" alt=""></span>
-                                <span><img src="images/kadibouda.png" alt=""></span>
-                                <span><img src="images/kadibouda.png" alt=""></span>
-                                <span><img src="images/kadibouda.png" alt=""></span>
-    
-                            </div>
-                        </div>
-                    </div>
-                    <div class="Footer-card">
-                        <div class="odkazy">
-                            <span>
-                                <img src="images/web.svg" alt="">
-                            </span>
-                            
-                            <span>
-                                <img src="images/map.svg" alt="">
-                            </span>
+	    {#each data as restaurace, index}
+	    	
+		<div class="restaurace">
+			<div class="Header-card">
+			    <div class="icon">
+				<img src="https://lh5.googleusercontent.com/p/AF1QipPjMAY9OvOWdck9_IIk_w7HC27hcbcFAHxFYYdl=w122-h92-k-no" alt="">
+			    </div>
+			    <div class="nazev">
+				<div class="title">
+				    <h3>{restaurace.name}</h3>
+				</div>
+				<div class="kadiboudy">
+				    <span>Průměr: </span>
+				    <span><img src="images/kadibouda.png" alt=""></span>
+				    <span><img src="images/kadibouda.png" alt=""></span>
+				    <span><img src="images/kadibouda.png" alt=""></span>
+				    <span><img src="images/kadibouda.png" alt=""></span>
+	
+				</div>
+			    </div>
+			</div>
+			<div class="Footer-card">
+			    <div class="odkazy">
+				<span>
+				    <img src="images/web.svg" alt="">
+				</span>
+				
+				<span>
+				    <img src="images/map.svg" alt="">
+				</span>
 
-                            <span>
-                                <img src="images/coments.svg" alt="">
-                            </span>
-                        </div>
-                        <div class="hodnoceni">
-                            
-                            <div class="like">
-                                <span>35x</span>
-                                <span><img src="images/like.svg" alt=""></span>
-                            </div>
-                        </div>
-                    </div>
-                
-            </div>
-            <div class="restaurace">
-                <div class="Header-card">
-                    <div class="icon">
-                        <img src="https://lh5.googleusercontent.com/p/AF1QipPjMAY9OvOWdck9_IIk_w7HC27hcbcFAHxFYYdl=w122-h92-k-no" alt="">
-                    </div>
-                    <div class="nazev">
-                        <div class="title">
-                            <h3>Restaurace</h3>
-                        </div>
-                        <div class="kadiboudy">
-                            <span>Průměr: </span>
-                            <span><img src="images/kadibouda.png" alt=""></span>
-                            <span><img src="images/kadibouda.png" alt=""></span>
-                            <span><img src="images/kadibouda.png" alt=""></span>
-                            <span><img src="images/kadibouda.png" alt=""></span>
+				<span>
+				    <img src="images/coments.svg" alt="">
+				</span>
+			    </div>
+			    <div class="hodnoceni">
+				
+				<div class="like">
+				    <span>{restaurace.vote_count}</span>
+				    <span><img id="voteButton" src="images/like.svg" alt="" on:click={async () => {
+					 toggleVote(Cookies.get("user"), restaurace.location_id)
+					 }}></span>
+				</div>
+			    </div>
+			</div>
+		    
+		</div>
 
-                        </div>
-                    </div>
-                </div>
-                <div class="Footer-card">
-                    <div class="odkazy">
-                        <span>
-                            <img src="images/web.svg" alt="">
-                        </span>
-                        
-                        <span>
-                            <img src="images/map.svg" alt="">
-                        </span>
-
-                        <span>
-                            <img src="images/coments.svg" alt="">
-                        </span>
-                    </div>
-                    <div class="hodnoceni">
-                        
-                        <div class="like">
-                            <span>35x</span>
-                            <span><img src="images/like.svg" alt=""></span>
-                        </div>
-                    </div>
-                </div>
-            
-        </div>
+	    {/each}
         </div>
     </section>
 
