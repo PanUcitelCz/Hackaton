@@ -74,7 +74,7 @@
             max-width 1300px
             display flex
             min-height: 96px
-            background grey
+            background #e30613
             z-index 10
 
             &:after
@@ -84,7 +84,7 @@
                 left 50%
                 width 100%
                 height 100%
-                background-color grey
+                background-color #e30613
                 transform translateX(-50%)
                 
                 @media $large-up
@@ -92,7 +92,7 @@
 
         nav
             position absolute
-            background-color grey
+            background-color #e30613
             z-index 1
             top 0
             left 0

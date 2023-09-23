@@ -21,6 +21,8 @@
 <Footer />
 
 <style lang="stylus">
-    
+	
+    main
+		margin 10px
 
 </style>
