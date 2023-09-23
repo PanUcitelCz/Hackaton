@@ -60,7 +60,7 @@
         position relative
         width 100%
         height 96px
-        background-color grey
+        background-color #e30613
         z-index 10
         display flex
 
@@ -147,9 +147,10 @@
                     a
                         text-decoration none
                         color white
+                        font-weight bold
 
                         &:hover
-                            color red
+                            color green
                             
         .Hamburger
             display block
