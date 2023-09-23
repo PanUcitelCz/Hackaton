@@ -1,9 +1,32 @@
 <script lang="ts">
     export let profile: string;
     import Cookies from 'js-cookie'
+    import { onMount } from 'svelte'
 
     profile = String(Cookies.get("user"))
 
+    onMount(async () => {
+	if(Cookies.get("session_id") == ""){
+	    window.location.href = "./login"
+	}
+
+
+	const rawResponse = await fetch('http://localhost:5000/find-closest', {
+	    method: 'GET',
+	    headers: {
+	      'Accept': 'application/json',
+	      'Content-Type': 'application/json',
+	      'Access-Control-Allow-Origin': '*'
+	    }
+	});
+
+	const content = rawResponse;
+
+	content.text().then(e=>{
+	    e=JSON.parse(e)
+	    console.log(e)
+	});
+    });
 </script>
 
 <svelte:head>

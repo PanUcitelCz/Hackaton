@@ -21,6 +21,10 @@ CORS(app)
 @app.route("/add-review", methods=["POST", "GET"])
 def add_review():
     review = json.loads(request.get_data(), object_hook=lambda d: SimpleNamespace(**d))
+    
+    if(db.locations.find_one({"location_id": review.location_id}) is None):
+        db.locations.insert_one({"location_id": review.location_id, "zumpy": 0, "visit-count": 0 })
+
     db.reviews.insert_one({"user_id": review.user_id, "rating": review.rating})
 
     return Response("Review added", status=201)
@@ -62,24 +66,54 @@ def register():
     return response 
 
 
-@app.route("/vote", methods=["POST"])
-def vote():
-    
-    data = json.loads(request.get_data(), object_hook=lambda d: SimpleNamespace(**d))
 
-    if(db.locations.find_one({"location_id": data.location_id}) is None):
-        db.locations.insert_one({"location_id": data.location_id, "zumpy": 0, "visit-count": 0 })
+@app.route("/remove-vote", methods=["POST"])
+def remove_vote():
+    vote = json.loads(request.get_data(), object_hook=lambda d: SimpleNamespace(**d))
+
+    db.votes.delete_one({"user_id": vote.user_id, "location_id": vote.location_id})
+    return Response(status=200)
+
+@app.route("/add-vote", methods=["POST"])
+def add_vote():
+    
+    vote = json.loads(request.get_data(), object_hook=lambda d: SimpleNamespace(**d))
+
+    if(db.locations.find_one({"location_id": vote.location_id}) is None):
+        db.locations.insert_one({"location_id": vote.location_id, "zumpy": 0, "visit-count": 0 })
         
-    db.vote.insert_one({"location_id": data.location_id, "zumpy": 0, "visit-count" })
+    db.votes.insert_one({"location_id": data.location_id, "user_id": vote.user_id, "vote_time": vote.time})
+    return Response(status=200)
 
 @app.route("/find-closest", methods=["GET"])
 def find_closest():
     Headers={"Referer":"https://foodapp.com/","accept":"application/json"}
     x=requests.get('https://api.content.tripadvisor.com/api/v1/location/nearby_search?latLong=49.7432394%2C13.4106877&key=06071D2668FF4DE3B82432788FF07AE8&language=en',headers=Headers);
+    found_locations = x.json().get("data")
+    print(found_locations)
+
+    for i, location in enumerate(found_locations):
+        db_location = db.locations.find_one({"location_id": location.get("location_id")})
+
+        if db_location:
+            found_locations[i]["zumpy"] = db_location.get("zumpy")
+            found_locations[i]["kadiboudy"] = db_location.get("kadiboudy")
+            found_locations[i]["visit_count"] = db_location.get("visit_count")
+
+        else:
+            found_locations[i]["zumpy"] = 0
+            found_locations[i]["kadiboudy"] = 0
+            found_locations[i]["visit_count"] = 0
+            found_locations[i]["average"] = 0
+
+        #print(location)
+        #print(db_location)
+
     #data = json.loads(request.get_data(), object_hook=lambda d: SimpleNamespace(**d))
-    print(x.json())
+    #print(x.json())
     
-    msg = Response(x.json(),status=200).headers["data"] = "application/json"
+    msg = Response(json.dumps(found_locations), status=200)
+    msg.headers["Content-Type"] = "application/json"
     return msg
 
 if __name__ == "__main__":
