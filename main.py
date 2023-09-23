@@ -62,6 +62,16 @@ def register():
     return response 
 
 
+@app.route("/vote", methods=["POST"])
+def vote():
+    
+    data = json.loads(request.get_data(), object_hook=lambda d: SimpleNamespace(**d))
+
+    if(db.locations.find_one({"location_id": data.location_id}) is None):
+        db.locations.insert_one({"location_id": data.location_id, "zumpy": 0, "visit-count": 0 })
+        
+    db.vote.insert_one({"location_id": data.location_id, "zumpy": 0, "visit-count" })
+
 @app.route("/find-closest", methods=["GET"])
 def find_closest():
     Headers={"Referer":"https://foodapp.com/","accept":"application/json"}

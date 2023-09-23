@@ -1,10 +1,6 @@
 <script lang="ts">
     import Buttons from "$lib/components/Buttons.svelte";
-    import Cookies from 'js-cookie'
-
-    async function login(username: string, password: string){
-
-    }
+    import Cookies from 'js-cookie';
 
     async function register(username: string, password: string){
 	const rawResponse = await fetch('http://localhost:5000/register', {
@@ -19,11 +15,21 @@
 
 	const content = rawResponse;
 
-	console.log(content.text());
+	content.text().then(e=>{
 
-	Cookies.set('user', username)
+	    Cookies.set('user', username)
+	    try {
+		Cookies.set('session_id', JSON.parse(e).session_id)
+	    }
+	    catch (e){
+		// TODO throw user not found/wrong password
+	    }
 
-	console.log(Cookies.get("user"))
+	    console.log(Cookies.get("user"))
+	    console.log(Cookies.get("session_id"))
+
+	    window.location.href = "./profile";
+	})
     }
 	
 </script>
