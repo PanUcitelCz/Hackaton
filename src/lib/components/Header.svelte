@@ -1,5 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
+    import Cookies from 'js-cookie'
 
     let desktop: MediaQueryList
 
@@ -19,6 +20,13 @@
 
     let isOpen = false
 
+
+    function logout(){
+	Cookies.set("session_id", "")
+	Cookies.set("user", "")
+	window.location.href = "./login"
+    }
+
 </script>
 
     <svelte:window on:resize={resize} />
@@ -37,7 +45,7 @@
                 <ul>
                     <li><a href="/">Home-page</a></li>
                     <li><a href="/login">Login</a></li>
-                    <li><a href="/">Test1</a></li>
+                    <li><a href="#" on:click={logout}>Test1</a></li>
                 </ul>
             </nav>
         </div>
