@@ -60,6 +60,7 @@
                 nadpis="Indická a Nepálská restaurace"
                 like=35
                 prumer=35 />
+        </div>
     </section>
 
     

@@ -24,7 +24,6 @@
                     <span><img src="images/kadibouda.png" alt=""></span>
                     <span><img src="images/kadibouda.png" alt=""></span>
                 </div>
-            </div>
         </div>
         <div class="Footer-card">
             <div class="odkazy">
@@ -45,7 +44,7 @@
                 </div>
             </div>
         </div>
-
+    </div>
 </div>
 <style lang="stylus">
 
