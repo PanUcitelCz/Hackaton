@@ -2,12 +2,24 @@
 	import Card from "$components/Card.svelte";
 
     export let profile: string;
-    export let data: Array<Object>;
+    export let data = [{"location_id": 0, "name": "0"}, {"location_id": 0, "name": "0"}];
+    export let test = [1, 5, 3]
     import Cookies from 'js-cookie'
     import { onMount } from 'svelte'
 
     profile = String(Cookies.get("user"))
     var voteToggled = "remove-vote"
+
+    function eyo(nadpis, like, img, prumer){
+    new Card({target: document.querySelector("#eyo"),
+	    props :{
+		nadpis: nadpis,
+		like: like,
+		img: img,
+		prumer: prumer
+
+	    }})
+    }
 
     onMount(async () => {
 	if(Cookies.get("session_id") == ""){
@@ -27,12 +39,14 @@
 	const content = rawResponse;
 
 	content.text().then(e=>{
-	    e=JSON.parse(e)
 	    console.log("recieved")
 	    console.log(e)
 
-	    data = e
-	    console.log(e)
+	    data = JSON.parse(e)
+	    data.forEach(restaurace => {
+		eyo(restaurace.name, restaurace.like, "", restaurace.average)
+	    })
+	    console.log("")
 	});
     });
 
@@ -62,8 +76,10 @@
 	    e=JSON.parse(e)
 
 	    console.log(e)
+	    
+	    
 	}); 
-    }
+    } 
 
 </script>
 
@@ -72,7 +88,7 @@
 </svelte:head>
 
 <div class="nadpis">
-    <h1>Výtejte {profile}</h1>
+    <h1 on:click={() => {test.push(6); console.log("aa")}}>Výtejte {profile}</h1>
 </div>
 
 <div class="container">
@@ -80,22 +96,8 @@
         <div class="Nadpis">
             <h3>V poslední době hodnoceno</h3>
         </div>
-        <div class="hlasovaci_container">
-            <Card 
-                img="https://lh5.googleusercontent.com/p/AF1QipMZlhgzRsVc9KykI6fj2yWoYVlW9DhaOd_WBiUH=w408-h272-k-no"
-                nadpis="Indická a Nepálská restaurace"
-                like=35
-                prumer=35 />
-            <Card 
-                img="https://lh5.googleusercontent.com/p/AF1QipMZlhgzRsVc9KykI6fj2yWoYVlW9DhaOd_WBiUH=w408-h272-k-no"
-                nadpis="Indická a Nepálská restaurace"
-                like=35
-                prumer=35 />
-            <Card 
-                img="https://lh5.googleusercontent.com/p/AF1QipMZlhgzRsVc9KykI6fj2yWoYVlW9DhaOd_WBiUH=w408-h272-k-no"
-                nadpis="Indická a Nepálská restaurace"
-                like=35
-                prumer=35 />
+        <div class="hlasovaci_container" id="eyo" use:eyo>
+        </div>
     </section>
 
     

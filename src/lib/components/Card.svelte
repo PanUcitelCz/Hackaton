@@ -2,9 +2,17 @@
 
     export let nadpis: string;
     export let img: string;
-    export let prumer: string;
-    export let like: string;
+    export let prumer: number;
+    export let like: number;
 
+    function change(el)
+{if(el.style.backgroundColor == "green"){
+		    el.style.backgroundColor = "white"
+		    }
+		    else{
+		    el.style.backgroundColor = "green"
+		    }
+		    }
 </script>
 
 
@@ -24,7 +32,6 @@
                     <span><img src="images/kadibouda.png" alt=""></span>
                     <span><img src="images/kadibouda.png" alt=""></span>
                 </div>
-            </div>
         </div>
         <div class="Footer-card">
             <div class="odkazy">
@@ -41,11 +48,11 @@
             <div class="hodnoceni">
                 <div class="like">
                     <span>{like}</span>
-                    <span><img src="images/like.svg" alt=""></span>
+		    <span><img src="images/like.svg" alt="" on:click={(e) => {change(e.target)}}></span>
                 </div>
             </div>
         </div>
-
+    </div>
 </div>
 <style lang="stylus">
 
