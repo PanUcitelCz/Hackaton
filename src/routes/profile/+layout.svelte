@@ -21,7 +21,9 @@
 <Footer />
 
 <style lang="stylus">
-	
+	:global(body)
+		background-color white !important
+
     main
 		margin 10px
 

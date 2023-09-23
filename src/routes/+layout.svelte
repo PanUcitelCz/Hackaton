@@ -10,7 +10,7 @@
         font-family 'Bricolage Grotesque', sans-serif
         margin 0
         padding 0
-        background-color white
+        background-color #E30613
 
 	main
 		margin 0 auto
